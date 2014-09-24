@@ -3,7 +3,14 @@ hbase-fs
 
 # A Simple file system build on HBase. 
 
-With special `InputStream` and `OutputStream` implementation, you can easily read and write file on HBase.
+hbase-fs just like normal local file system. It has three main class:
+
+- HBaseFile
+- HBaseFileInputStream
+- HBaseFileOutputStream
+
+With special `InputStream` and `OutputStream` implementation, you can easily 
+read and write file on HBase.
 
 ### Read
 1. `HBaseFile.Factory.buildHBaseFile(identifier)` get a HBaseFile instance;
@@ -17,3 +24,4 @@ With special `InputStream` and `OutputStream` implementation, you can easily rea
 -  remember to **close**
 
 Now, it's just a **Prototype**. 
+
