@@ -59,7 +59,7 @@ class HBaseFileHelper {
         }
     }
 
-    public static void saveOrUpdateMeta(HBaseFile hbFile) throws IOException {
+    static void saveOrUpdateMeta(HBaseFile hbFile) throws IOException {
         byte[] idBytes = Bytes.toBytes(hbFile.getIdentifier());
         Put put = new Put(idBytes);
         put.add(new KeyValue(idBytes, CF_META, M_DESC, Bytes.toBytes(hbFile.getDesc())));
@@ -70,7 +70,7 @@ class HBaseFileHelper {
         fsTable.put(put);
     }
 
-    public static void readMeta(HBaseFile hbFile) throws IOException {
+    static void readMeta(HBaseFile hbFile) throws IOException {
         Get get = new Get(Bytes.toBytes(hbFile.getIdentifier()));
         get.addFamily(CF_META);
         Result result = fsTable.get(get);
@@ -81,7 +81,7 @@ class HBaseFileHelper {
         }
     }
 
-    public static void readMeta(Result result, HBaseFile hbFile) {
+    static void readMeta(Result result, HBaseFile hbFile) {
         hbFile.setDesc(Bytes.toString(result.getValue(CF_META, M_DESC)));
         hbFile.setSize(Bytes.toLong(result.getValue(CF_META, M_SIZE)));
         hbFile.setShards(Bytes.toInt(result.getValue(CF_META, M_SHARDS)));
@@ -89,7 +89,7 @@ class HBaseFileHelper {
         hbFile.setCreateTime(Bytes.toLong(result.getValue(CF_META, M_CREATE_TIME)));
     }
 
-    public static void addShard(HBaseFile hbFile, byte[] shard) throws IOException {
+    static void addShard(HBaseFile hbFile, byte[] shard) throws IOException {
         if (hbFile.isTransit() && shard != null && shard.length > 0) {
             byte[] idBytes = Bytes.toBytes(hbFile.getIdentifier());
             Put put = new Put(idBytes);
@@ -101,7 +101,7 @@ class HBaseFileHelper {
         }
     }
 
-    public static byte[] readShard(HBaseFile hbFile, int shard) throws IOException {
+    static byte[] readShard(HBaseFile hbFile, int shard) throws IOException {
         if (!hbFile.integrity()) {
             return null;
         }
@@ -116,12 +116,12 @@ class HBaseFileHelper {
         return shards;
     }
 
-    public static void delete(HBaseFile hbFile) throws IOException {
+    static void delete(HBaseFile hbFile) throws IOException {
         Delete del = new Delete(Bytes.toBytes(hbFile.getIdentifier()));
         fsTable.delete(del);
     }
 
-    public static ResultScanner scan() throws IOException {
+    static ResultScanner scan() throws IOException {
         return fsTable.getScanner(CF_META);
     }
 
