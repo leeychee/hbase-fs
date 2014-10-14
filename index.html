@@ -40,20 +40,17 @@
       </nav>
       <section>
         <h1>
-<a name="hbase-fs" class="anchor" href="#hbase-fs"><span class="octicon octicon-link"></span></a>hbase-fs</h1>
+<a name="simple-file-system-on-hbase" class="anchor" href="#simple-file-system-on-hbase"><span class="octicon octicon-link"></span></a>Simple File System on HBase</h1>
 
 <h2>
-<a name="simple-file-system-on-hbase" class="anchor" href="#simple-file-system-on-hbase"><span class="octicon octicon-link"></span></a>Simple File System on HBase</h2>
-
-<h3>
-<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h3>
+<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h2>
 
 <p>Sometimes, when we use <a href="http://hbase.apache.org/">HBase</a>, we need to save files, especially very small files, such as images. HBase's API does not very friendly to do this. So, I try to build to simple file system on HBase, to simplify read &amp; write file on HBase.</p>
 
 <p><code>hbase-fs</code> is a flat File System, not like the linux's file system, it does not have directory structure. All file has a identifier, which I recommend to use MD5, for reading &amp; writing on the hbase-fs.</p>
 
-<h3>
-<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use?</h3>
+<h2>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use?</h2>
 
 <p>hbase-fs just like normal local file system. It has three main class:</p>
 
@@ -66,14 +63,14 @@
 <p>With special <code>InputStream</code> and <code>OutputStream</code> implementation, you can easily 
 read and write file on HBase.</p>
 
-<h4>
-<a name="hbasefile" class="anchor" href="#hbasefile"><span class="octicon octicon-link"></span></a>HBaseFile</h4>
+<h3>
+<a name="hbasefile" class="anchor" href="#hbasefile"><span class="octicon octicon-link"></span></a>HBaseFile</h3>
 
 <p>I recommend to use md5 or SHA-1 of the file as the identifier, so you can easily
 find out wether the content of a file has been stored in the hbase cluster.</p>
 
-<h4>
-<a name="read" class="anchor" href="#read"><span class="octicon octicon-link"></span></a>Read</h4>
+<h3>
+<a name="read" class="anchor" href="#read"><span class="octicon octicon-link"></span></a>Read</h3>
 
 <ol>
 <li>
@@ -90,8 +87,8 @@ find out wether the content of a file has been stored in the hbase cluster.</p>
 <span class="o">}</span>
 </pre></div>
 
-<h4>
-<a name="write" class="anchor" href="#write"><span class="octicon octicon-link"></span></a>Write</h4>
+<h3>
+<a name="write" class="anchor" href="#write"><span class="octicon octicon-link"></span></a>Write</h3>
 
 <ol>
 <li>like Read's step 1;</li>
@@ -109,20 +106,23 @@ find out wether the content of a file has been stored in the hbase cluster.</p>
 <span class="o">}</span>
 </pre></div>
 
+<h2>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h2>
+
 <p>Now, it's just a <strong>Prototype</strong>. </p>
 
 <h2>
 <a name="%E5%9F%BA%E4%BA%8E-hbase-%E7%9A%84%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F" class="anchor" href="#%E5%9F%BA%E4%BA%8E-hbase-%E7%9A%84%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="octicon octicon-link"></span></a>基于 HBase 的文件系统</h2>
 
-<h3>
-<a name="%E6%A6%82%E8%BF%B0" class="anchor" href="#%E6%A6%82%E8%BF%B0"><span class="octicon octicon-link"></span></a>概述</h3>
+<h2>
+<a name="%E6%A6%82%E8%BF%B0" class="anchor" href="#%E6%A6%82%E8%BF%B0"><span class="octicon octicon-link"></span></a>概述</h2>
 
 <p>有些时候,由于业务和环境的限制,我们需要使用 <a href="http://hbase.apache.org/">HBase</a> 来存储文件,尤其是小文件,就像图片一类.然后. HBase 原生的 API 对于存取文件把并不是很友好.所以,我们尝试在 HBase 之上,构建一个简易的文件系统来简化我们的使用.</p>
 
 <p><code>hbase-fs</code> 是一个扁平状的文件系统, 没有类似于 linux 文件系统的那种目录结构. 我们目前也不打算构建这样的内容. 所有的文件通过唯一的标识符来描述, 所有的读写操作都依赖于这个操作符. 我们建议, 可以使用文件的 MD5 码, 作为文件的唯一标识符, 这样天然就具备了判断文件是否已经存入的功能. </p>
 
-<h3>
-<a name="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8" class="anchor" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="octicon octicon-link"></span></a>如何使用?</h3>
+<h2>
+<a name="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8" class="anchor" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="octicon octicon-link"></span></a>如何使用?</h2>
 
 <p>类似于 Java 里处理的通用办法, 我们使用特殊的InputStream, OutputStream 来实现对 hbase-fs 中文件读写. 主要有以下三个类. </p>
 
@@ -132,13 +132,13 @@ find out wether the content of a file has been stored in the hbase cluster.</p>
 <li>HBaseFileOutputStream</li>
 </ul>
 
-<h4>
-<a name="hbasefile-1" class="anchor" href="#hbasefile-1"><span class="octicon octicon-link"></span></a>HBaseFile</h4>
+<h3>
+<a name="hbasefile-1" class="anchor" href="#hbasefile-1"><span class="octicon octicon-link"></span></a>HBaseFile</h3>
 
 <p>这是一个文件描述类, 用来描述存储在 hbae-fs 中的文件. 其中最主要的内容就是标识符(identifier), 他唯一确定了 hbase-fs 中一个文件. 我们强烈建议你使用文件的 MD5 值作为这个标识符. 通过使用 MD5, 文件系统天生就具有了识别重复文件的能力, 即使文件的名称已经改变. </p>
 
-<h4>
-<a name="%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6" class="anchor" href="#%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="octicon octicon-link"></span></a>读取文件</h4>
+<h3>
+<a name="%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6" class="anchor" href="#%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="octicon octicon-link"></span></a>读取文件</h3>
 
 <ol>
 <li>
@@ -154,8 +154,8 @@ find out wether the content of a file has been stored in the hbase cluster.</p>
 <span class="o">}</span>
 </pre></div>
 
-<h4>
-<a name="%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6" class="anchor" href="#%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6"><span class="octicon octicon-link"></span></a>写入文件</h4>
+<h3>
+<a name="%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6" class="anchor" href="#%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6"><span class="octicon octicon-link"></span></a>写入文件</h3>
 
 <ol>
 <li>
@@ -173,8 +173,8 @@ find out wether the content of a file has been stored in the hbase cluster.</p>
 <span class="o">}</span>
 </pre></div>
 
-<h3>
-<a name="%E5%BC%95%E7%94%A8" class="anchor" href="#%E5%BC%95%E7%94%A8"><span class="octicon octicon-link"></span></a>引用</h3>
+<h2>
+<a name="%E5%BC%95%E7%94%A8" class="anchor" href="#%E5%BC%95%E7%94%A8"><span class="octicon octicon-link"></span></a>引用</h2>
 
 <p><a href="http://hbase.apache.org">HBase</a></p>
       </section>
