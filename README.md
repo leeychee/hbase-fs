@@ -1,4 +1,4 @@
-hbase-fs Simple File System on HBase 基于 HBase 的文件系统
+Simple File System on HBase
 ========
 
 ## Description
@@ -47,8 +47,10 @@ try (OutputStream is = new HBaseFileOutputStream(hbf)) {
 }
 ```
 
+## TODO
 Now, it's just a **Prototype**. 
 
+## 基于 HBase 的文件系统
 ## 概述
 有些时候,由于业务和环境的限制,我们需要使用 [HBase](http://hbase.apache.org/) 来存储文件,尤其是小文件,就像图片一类.然后. HBase 原生的 API 对于存取文件把并不是很友好.所以,我们尝试在 HBase 之上,构建一个简易的文件系统来简化我们的使用.
 
