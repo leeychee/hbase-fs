@@ -51,6 +51,8 @@ public class HBaseFileUtils {
             HBaseFile hbFile = HBaseFile.Factory.buildHBaseFile(md5, localFile.getName());
             if (hbFile.integrity()) {
                 // do nothing. the file is already store in hbase cluster.
+                // TODO handle upload the file on the same time.
+                // TODO update description.
                 log.debug("The local file which md5 is " + md5 + ", has already been uploaded.");
             } else {
                 // When the hbase file is not integrity, delete it first,
