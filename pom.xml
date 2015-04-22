@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.lychee</groupId>
+	<artifactId>hbase-fs</artifactId>
+	<version>0.2.0</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>hbase-fs-core</module>
+		<module>hbase-fs-rest</module>
+		<module>hbase-fs-distribution</module>
+	</modules>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+
+		<logback.classic.version>1.1.2</logback.classic.version>
+
+		<hbase.version>0.94.16</hbase.version>
+		<hadoop.version>2.0.0-cdh4.5.0</hadoop.version>
+		<guava.version>12.0.1</guava.version>
+
+		<!-- Test Dependencies -->
+		<mockito-all.version>1.8.5</mockito-all.version>
+		<junit.version>4.11</junit.version>
+		<maven.resources.plugin.version>2.6</maven.resources.plugin.version>
+		<maven.compiler.plugin.version>2.5.1</maven.compiler.plugin.version>
+		<maven.surefire.plugin.version>2.10</maven.surefire.plugin.version>
+		<maven.assembly.plugin.version>2.4</maven.assembly.plugin.version>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.classic.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.hbase</groupId>
+				<artifactId>hbase</artifactId>
+				<version>${hbase.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.google.guava</groupId>
+						<artifactId>guava</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-log4j12</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.hadoop</groupId>
+				<artifactId>hadoop-common</artifactId>
+				<version>${hadoop.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>slf4j-log4j12</artifactId>
+						<groupId>org.slf4j</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<!-- test dependcy -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<configuration>
+						<archive>
+							<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>org.lychee.fs.hbase.rest.Main</mainClass>
+							<classpathPrefix>./</classpathPrefix>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven.resources.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.compiler.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven.surefire.plugin.version}</version>
+					<configuration>
+						<forkMode>once</forkMode>
+						<argLine>-Dfile.encoding=UTF-8</argLine>
+						<includes>
+							<include>**/*Test.java</include>
+						</includes>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${maven.assembly.plugin.version}</version>
+					<executions>
+						<execution>
+							<id>distro-assembly-src</id>
+							<phase>package</phase>
+							<goals>
+								<goal>single</goal>
+							</goals>
+							<configuration>
+								<finalName>hbase-fs-${project.parent.version}</finalName>
+								<descriptors>
+									<descriptor>src/assemble/src.xml</descriptor>
+								</descriptors>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+    <!-- More Project Information -->
+    <name>Simple File System on HBase</name>
+    <description>Simple File System on HBase</description>
+    <url>http://leeychee.github.io/hbase-fs/</url>
+    <inceptionYear>2014-10-10</inceptionYear>
+    <developers>
+        <developer>
+            <id>chunhui</id>
+            <name>Chunhui Liu</name>
+            <email>leeychee@gmail.com</email>
+            <url>http://leeychee.github.io/</url>
+            <organization></organization>
+            <organizationUrl></organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+            <properties>
+                <picUrl></picUrl>
+            </properties>
+        </developer>
+    </developers>
+    <contributors>
+        
+    </contributors>
+</project>
