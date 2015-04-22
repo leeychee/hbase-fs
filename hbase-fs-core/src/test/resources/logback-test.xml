@@ -3,12 +3,13 @@
 <configuration>
 
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
-		<layout class="ch.qos.logback.classic.PatternLayout">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<pattern>%-20(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{80} - %msg%n</pattern>
-		</layout>
+		</encoder>
 	</appender>
 
-	<logger name="com.lychee.fs" level="DEBUG" />
+	<logger name="org.lychee.fs" level="DEBUG" />
+	<logger name="org.apache" level="WARN" />
 
 	<root level="INFO">
 		<appender-ref ref="stdout" />
