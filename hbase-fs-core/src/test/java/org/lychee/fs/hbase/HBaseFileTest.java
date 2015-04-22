@@ -17,8 +17,11 @@
 package org.lychee.fs.hbase;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -36,8 +39,9 @@ import org.slf4j.LoggerFactory;
 public class HBaseFileTest {
     private static final Logger log = LoggerFactory.getLogger(HBaseFileTest.class);
     
-    private final String uploadPath = "/home/chunhui/github/hbase-fs/pic/";
-    private final String outPath = uploadPath + File.separator + "out" + File.separator;
+	private final TempFileManager tfg = new TempFileManager();
+    private final String uploadPath = tfg.getTempDir();
+    private final String outPath = uploadPath + File.separator + "download" + File.separator;
     
     public HBaseFileTest() {
     }
@@ -52,12 +56,14 @@ public class HBaseFileTest {
     
     @Before
     public void setUp() throws IOException {
+		tfg.generateFiles(20);
         FileUtils.deleteDirectory(new File(outPath));
         FileUtils.forceMkdir(new File(outPath));
     }
     
     @After
-    public void tearDown() {
+    public void tearDown() throws IOException {
+		tfg.clear();
     }
 
     @Test
@@ -78,8 +84,17 @@ public class HBaseFileTest {
     
     private void testAHBaseFile(File localFile) throws IOException {
         String identifier = HBaseFileUtils.upload(localFile);
-        File outFile = new File(outPath + localFile.getName());
-        HBaseFileUtils.download(identifier, outFile);
+        File downloadFile = new File(outPath + localFile.getName());
+        HBaseFileUtils.download(identifier, downloadFile);
+		String localMd5, downloadMd5;
+		try (InputStream lis = new FileInputStream(localFile)) {
+			localMd5 = DigestUtils.md5Hex(lis);
+		}
+		try (InputStream dis = new FileInputStream(downloadFile)) {
+			downloadMd5 = DigestUtils.md5Hex(dis);
+		}
+		assertEquals(localMd5, downloadMd5);
+		log.debug("Success to upload & download file: " + localFile.getName());
     }
     
     private void testDel(HBaseFile hbFile) throws IOException {
