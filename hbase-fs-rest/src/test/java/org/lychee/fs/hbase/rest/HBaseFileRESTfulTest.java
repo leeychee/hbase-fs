@@ -3,15 +3,15 @@ package org.lychee.fs.hbase.rest;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
-public class HBaseFileSystemTest {
+public class HBaseFileRESTfulTest {
 
     private HttpServer server;
     private WebTarget target;
@@ -41,8 +41,8 @@ public class HBaseFileSystemTest {
      * Test to see that the message "Got it!" is sent in the response.
      */
     @Test
-    public void testGetIt() {
-        String responseMsg = target.path("hfs").request().get(String.class);
-        assertEquals("Got it!", responseMsg);
+    public void testGetFileByIdentifier() {
+        Response r = target.path("file").request().get();
+
     }
 }
