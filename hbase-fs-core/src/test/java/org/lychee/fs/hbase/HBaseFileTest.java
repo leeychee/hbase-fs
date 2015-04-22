@@ -94,7 +94,8 @@ public class HBaseFileTest {
 			downloadMd5 = DigestUtils.md5Hex(dis);
 		}
 		assertEquals(localMd5, downloadMd5);
-		log.debug("Success to upload & download file: " + localFile.getName());
+		log.debug("Success to upload & download file: {}. MD5: {}",
+				localFile.getName(), localMd5);
     }
     
     private void testDel(HBaseFile hbFile) throws IOException {
