@@ -16,6 +16,7 @@
 
 package org.lychee.fs.hbase;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -37,7 +38,9 @@ public class HBaseFileInputStream extends InputStream {
     private byte[] cache;
     private int cursor;
     
-    public HBaseFileInputStream(HBaseFile hbFile) {
+    public HBaseFileInputStream(HBaseFile hbFile) throws FileNotFoundException {
+		if (!hbFile.exists()) 
+			throw new FileNotFoundException(hbFile.getIdentifier());
         this.hbFile = hbFile;
     }
 
