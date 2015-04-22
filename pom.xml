@@ -16,7 +16,10 @@
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 
+		<commons.lang.version>2.6</commons.lang.version>
+		<commons.io.version>2.4</commons.io.version>
 		<logback.classic.version>1.1.2</logback.classic.version>
+		<slf4j.log4j12.version>1.7.7</slf4j.log4j12.version>
 
 		<hbase.version>0.94.16</hbase.version>
 		<hadoop.version>2.0.0-cdh4.5.0</hadoop.version>
@@ -33,9 +36,24 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${commons.lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons.io.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.classic.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>1.7.4</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.hbase</groupId>
@@ -67,6 +85,10 @@
 				<artifactId>hadoop-common</artifactId>
 				<version>${hadoop.version}</version>
 				<exclusions>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
 					<exclusion>
 						<artifactId>slf4j-log4j12</artifactId>
 						<groupId>org.slf4j</groupId>
