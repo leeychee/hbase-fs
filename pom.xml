@@ -114,9 +114,9 @@
 					<configuration>
 						<archive>
 							<manifest>
-							<addClasspath>true</addClasspath>
-							<mainClass>org.lychee.fs.hbase.rest.Main</mainClass>
-							<classpathPrefix>./</classpathPrefix>
+								<addClasspath>true</addClasspath>
+								<mainClass>org.lychee.fs.hbase.rest.Main</mainClass>
+								<classpathPrefix>./</classpathPrefix>
 							</manifest>
 						</archive>
 					</configuration>
@@ -167,30 +167,30 @@
 		</pluginManagement>
 	</build>
 
-    <!-- More Project Information -->
-    <name>Simple File System on HBase</name>
-    <description>Simple File System on HBase</description>
-    <url>http://leeychee.github.io/hbase-fs/</url>
-    <inceptionYear>2014-10-10</inceptionYear>
-    <developers>
-        <developer>
-            <id>chunhui</id>
-            <name>Chunhui Liu</name>
-            <email>leeychee@gmail.com</email>
-            <url>http://leeychee.github.io/</url>
-            <organization></organization>
-            <organizationUrl></organizationUrl>
-            <roles>
-                <role>architect</role>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-            <properties>
-                <picUrl></picUrl>
-            </properties>
-        </developer>
-    </developers>
-    <contributors>
+	<!-- More Project Information -->
+	<name>Simple File System on HBase</name>
+	<description>Simple File System on HBase</description>
+	<url>http://leeychee.github.io/hbase-fs/</url>
+	<inceptionYear>2014-10-10</inceptionYear>
+	<developers>
+		<developer>
+			<id>chunhui</id>
+			<name>Chunhui Liu</name>
+			<email>leeychee@gmail.com</email>
+			<url>http://leeychee.github.io/</url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+			<properties>
+				<picUrl></picUrl>
+			</properties>
+		</developer>
+	</developers>
+	<contributors>
         
-    </contributors>
+	</contributors>
 </project>
